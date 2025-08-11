@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student-list</title>
+</head>
+<body>
+    <h1>Student-list</h1>
+    <a th:href="@{/student/add}">Add new student</a>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Year of birth</th>
+            <th>GPA</th>
+            <th>Major</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--${studentList}: chính là attributeName trong model-->
+        <tr th:each="s : ${studentList}">
+            <td th:text = "${s.id}"></td>
+            <td th:text = "${s.name}"></td>
+            <td th:text = "${s.yob}"></td>
+            <td th:text = "${s.gpa}"></td>
+            <td th:text = "${s.major.name}"></td>
+            <td>
+                <a th:href="@{'/student/edit/' + ${s.id}}">Edit</a> |
+                <a th:href="@{'/student/delete/' + ${s.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

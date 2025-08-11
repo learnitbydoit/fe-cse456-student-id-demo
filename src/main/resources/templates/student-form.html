@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student</title>
+</head>
+<body>
+    <form action="/student/form" th:object="${student}" method="post">
+        <p>
+            <label for="id">ID</label>
+            <!--<input type="text" id="id" name="id" value="${student.id}">-->
+            <!--th:field tương đương với name + value. Khi này thymeleaf sẽ
+            tự động đặt name-->
+            <input type="text" id="id" th:field="*{id}">
+        </p>
+        <p>
+            <label for="name">Name</label>
+            <input type="text" id="name" th:field="*{name}">
+        </p>
+        <p>
+            <label for="yob">Year of Birth</label>
+            <input type="text" id="yob" th:field="*{yob}">
+        </p>
+        <p>
+            <label for="gpa">GPA</label>
+            <input type="text" id="gpa" th:field="*{gpa}">
+        </p>
+        <p>
+            <label for="major">Major</label>
+
+            <!--Xem lại nhân sinh!!!!!-->
+            <select id="major" th:field="*{major.id}">
+                <option th:each="m : ${majorList}"
+                        th:value="${m.id}"
+                        th:text="${m.name}"
+                        th:selected="${student.major.id==m.id}">
+                        >Kỹ thuật phần mềm</option>
+            </select>
+        </p>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
