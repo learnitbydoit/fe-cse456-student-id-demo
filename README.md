@@ -43,6 +43,14 @@
 
 ## Validate dữ liệu
 > Xem ghi chú trước `@PostMapping` của **Save** dữ liệu nhập.
+### Hàm `save` để xử lý link **save**
+
+- **Chặn đầu chặn đuôi** trong quá trình binding dữ liệu từ form lên object.
+- **Kỹ thuật Bean Validation** chỉ sử dụng nếu binding bằng **Object**.
+- **Chặn đầu** qua `@Valid` để kích hoạt việc kiểm soát từng field (đã được khai báo trong entity).
+- Nếu phát hiện **có lỗi** thì ghi biên bản vi phạm qua `BindingResult` (message được khai báo trong entity).
+- `BindingResult` sẽ được gửi kèm với `Model` và trả trở lại form nếu muốn người dùng **ở lại form để sửa**.
+
 
 ### Các bước thực hiện:
 1. Bổ sung dependency **Validation** (Bean Validation).
@@ -52,3 +60,4 @@
         - 3.1.1. Nếu có lỗi → trả về trang form kèm `category` + `formMode`.
     - 3.2. Thêm `@Valid` trước khi binding data từ view xuống.
     - 3.3. Thêm biến `BindingResult` để trả về các message thông báo cho Thymeleaf hiển thị (*thường dùng trong thẻ `<span>`*).
+    - 3.4. Dùng th:errors=*{tên thuộc tính binding} để hiển thị thông báo lỗi.
