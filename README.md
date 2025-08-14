@@ -58,7 +58,7 @@
 2. Khai báo các annotation bắt lỗi trong entity.
 3. Kích hoạt trong controller:
     - 3.1. Phân biệt **edit/new** (bằng hidden input trong form):
-        - 3.1.1. Nếu có lỗi → trả về trang form kèm `category` + `formMode`.
+        - 3.1.1. Nếu có lỗi → trả về trang form kèm `majorList` + `formMode`.
     - 3.2. Thêm `@Valid` trước khi binding data từ view xuống.
     - 3.3. Thêm biến `BindingResult` để trả về các message thông báo cho Thymeleaf hiển thị (*thường dùng trong thẻ `<span>`*).
     - 3.4. Dùng th:errors=*{tên thuộc tính binding} để hiển thị thông báo lỗi.
