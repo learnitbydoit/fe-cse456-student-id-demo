@@ -5,6 +5,8 @@
     <title>Edit Student</title>
 </head>
 <body>
+    <H1>Edit student info</H1>
+    <h1>Add new student info</h1>
     <form action="/student/form" th:object="${student}" method="post">
         <p>
             <label for="id">ID</label>
@@ -33,7 +35,6 @@
                 <option th:each="m : ${majorList}"
                         th:value="${m.id}"
                         th:text="${m.name}"
-                        th:selected="${student.major.id==m.id}">
                         >Kỹ thuật phần mềm</option>
             </select>
         </p>

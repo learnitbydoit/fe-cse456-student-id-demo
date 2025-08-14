@@ -1,4 +1,16 @@
 # Note 14/8/2025
+## Viết Controller cho link add new
+---
+## Phân biệt khi nào Edit / khi nào Add New
+1. Dùng `modelAttribute` chung (flag) **formMode**:
+    - 1.1. Hàm xử lý edit: gửi kèm `formMode = edit`.
+    - 1.2. Hàm xử lý new: gửi kèm `formMode = new`.
+
+2. Trên file HTML:
+    - 2.1. Dùng `if` để xử lý tiêu đề là **edit/new**.
+    - 2.2. `th:readonly` = kiểm tra nếu `formMode = edit`.
+
+---
 ## Viết Controller cho link remove / xóa
 1. Viết JavaScript thông báo **Yes/No** (trên file `trang-danh-sach.html`).
 2. Gọi service xóa.
@@ -27,17 +39,6 @@
 
 ## Sử dụng log để kiểm tra
 - Dùng log trong danh sách controller để theo dõi luồng xử lý.
-
----
-
-## Phân biệt khi nào Edit / khi nào Add New
-1. Dùng `modelAttribute` chung (flag) **formMode**:
-    - 1.1. Hàm xử lý edit: gửi kèm `formMode = edit`.  
-    - 1.2. Hàm xử lý new: gửi kèm `formMode = new`.
-
-2. Trên file HTML:
-    - 2.1. Dùng `if` để xử lý tiêu đề là **edit/new**.  
-    - 2.2. `th:readonly` = kiểm tra nếu `formMode = edit`.
 
 ---
 
