@@ -26,5 +26,19 @@ public class StudentService {
     public Student getStudentById(String id){
         return studentRepo.findById(id).orElseThrow(); //hàm tự sinh
     }
+    //Hàm phục vụ xóa sinh viên
+    public void removeStudentById(String id){
+        studentRepo.deleteById(id);
+    }
+
+    //Hàm phục vụ tìm kiếm sinh viên bằng tên
+    public List<Student> searchStudentsByName(String keyword){
+        return studentRepo.searchAllByNameContainingIgnoreCase(keyword);
+    }
+
+    //Hàm phục vụ kiểm tra trùng pk
+    public Boolean checkExistsById(String id){
+        return studentRepo.existsById(id); //Hàm tự sinh
+    }
 
 }

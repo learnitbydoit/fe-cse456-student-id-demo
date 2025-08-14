@@ -5,27 +5,34 @@
     <title>Edit Student</title>
 </head>
 <body>
-    <H1>Edit student info</H1>
-    <h1>Add new student info</h1>
+    <H1 th:if="${formMode == 'edit'}">Edit student info</H1>
+    <h1 th:if="${formMode =='add'}">Add new student info</h1>
     <form action="/student/form" th:object="${student}" method="post">
         <p>
             <label for="id">ID</label>
             <!--<input type="text" id="id" name="id" value="${student.id}">-->
             <!--th:field tương đương với name + value. Khi này thymeleaf sẽ
             tự động đặt name-->
-            <input type="text" id="id" th:field="*{id}">
+            <input type="text" id="id" th:field="*{id}"
+                   th:readonly="${formMode=='edit'}"
+                th:style="${formMode=='edit'?'color : lightgrey' : 'color : black'}">
+            <span th:errors="*{id}" style="color: red"></span>
+            <span th:if="${duplicateId != null}" th:text="${duplicateId}" style="color: red">*</span>
         </p>
         <p>
             <label for="name">Name</label>
             <input type="text" id="name" th:field="*{name}">
+            <span th:errors="*{name}" style="color: red"></span>
         </p>
         <p>
             <label for="yob">Year of Birth</label>
             <input type="text" id="yob" th:field="*{yob}">
+            <span th:errors="*{yob}" style="color: red"></span>
         </p>
         <p>
             <label for="gpa">GPA</label>
             <input type="text" id="gpa" th:field="*{gpa}">
+            <span th:errors="*{gpa}" style="color: red"></span>
         </p>
         <p>
             <label for="major">Major</label>
@@ -39,6 +46,9 @@
             </select>
         </p>
         <button type="submit">Save</button>
+        <!--Lưu lại trạng thái edit hay add để khi bắt validate gọi lại form thì
+        có formMode nếu ko sẽ bị lỗi NPE-->
+        <input type="hidden" name="formMode" th:value="${formMode}" >
     </form>
 </body>
 </html>

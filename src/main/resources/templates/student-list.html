@@ -6,7 +6,13 @@
 </head>
 <body>
     <h1>Student-list</h1>
+    <form th:action="@{/students}" method="get">
+        <input placeholder="Search by name" type="text" name="keyword">
+        <button type="submit">Search</button>
+    </form>
+
     <a th:href="@{/student/add}">Add new student</a>
+
     <table>
         <thead>
         <tr>
@@ -28,7 +34,8 @@
             <td th:text = "${s.major.name}"></td>
             <td>
                 <a th:href="@{'/student/edit/' + ${s.id}}">Edit</a> |
-                <a th:href="@{'/student/delete/' + ${s.id}}">Delete</a>
+                <a th:href="@{'/student/delete/' + ${s.id}}"
+                onclick="confirm('Are you sure you want to delete this student?')">Delete</a>
             </td>
         </tr>
         </tbody>
