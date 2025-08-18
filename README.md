@@ -1,3 +1,37 @@
+# Note 18/8/2025
+## Bảo mật app thì có 2 việc: Authentication & Authorization
+
+### 1. Authentication (Xác thực bằng login)
+Khi xử lý login, có những trường hợp xảy ra:
+
+- **Username sai** → báo lỗi *account sai, không tồn tại* → gợi ý *sign up*.  
+- **Username đúng, password sai** → báo lỗi *password*.  
+  - Nếu nhập sai nhiều lần (>3) → Reset password.  
+  - Nếu tiếp tục sai (>5) → Khóa tài khoản.  
+- **Username đúng, password đúng, role = member** → chỉ có quyền *readonly*.  
+- **Username đúng, password đúng, role = admin/staff & active = false** → *invalid credentials*.  
+- **Username đúng, password đúng, role = admin/staff & active = true** → vào trang `/products` với quyền cụ thể.
+
+---
+
+### 2. Authorization (Phân quyền truy cập)
+- **Admin**: full CRUD.  
+- **Staff**: xem toàn bộ dữ liệu, tìm kiếm, chỉ CRUD trên một số entity nhất định.  
+- **Member**: chỉ xem.  
+
+---
+
+### 3. Gõ trực tiếp URL
+- Nếu chưa login mà gõ trực tiếp → chuyển sang trang login.  
+- Phải khởi động từ màn hình chính `/products` (??).  
+
+---
+
+### Lưu ý
+- **Model**: chuyển dữ liệu qua lại giữa các trang nhưng *không lưu giữ lâu dài*.  
+- **HttpSession**: giữ dữ liệu lâu dài qua nhiều trang (tồn tại mặc định 30 phút).  
+
+---
 # Note 14/8/2025
 ## Viết Controller cho link add new
 ---
