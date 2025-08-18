@@ -1,5 +1,5 @@
 # Note 18/8/2025
-## Bảo mật app thì có 2 việc: Authentication & Authorization
+## I. Bảo mật app thì có 2 việc: Authentication & Authorization
 
 ### 1. Authentication (Xác thực bằng login)
 Khi xử lý login, có những trường hợp xảy ra:
@@ -34,7 +34,7 @@ Khi xử lý login, có những trường hợp xảy ra:
 - **Model**: chuyển dữ liệu qua lại giữa các trang nhưng *không lưu giữ lâu dài*.  
 - **HttpSession**: giữ dữ liệu lâu dài qua nhiều trang (tồn tại mặc định 30 phút).
 
-## Xử lý cụ thể
+## II. Xử lý cụ thể
 
 ### Báo popup và chặn, quay lại login khi nhập link trực tiếp, viết ở đầu trang login
 Script xử lý thông báo nếu được redirect sang. Do có lấy dữ liệu từ server nên cần `th:inline` để Thymeleaf render đúng chuẩn dữ liệu:
@@ -50,7 +50,7 @@ Script xử lý thông báo nếu được redirect sang. Do có lấy dữ li�
     }
 </script>
 ```
-## Bổ sung thuộc tính ghi ngày giờ tạo lập, chỉnh sửa
+## III. Bổ sung thuộc tính ghi ngày giờ tạo lập, chỉnh sửa
 ### Tại class Student
 1. Bổ sung trên đầu class:
 ```java
