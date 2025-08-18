@@ -15,15 +15,25 @@ Khi xử lý login, có những trường hợp xảy ra:
 ---
 
 ### 2. Authorization (Phân quyền truy cập)
-- **Admin**: full CRUD.  
-- **Staff**: xem toàn bộ dữ liệu, tìm kiếm, chỉ CRUD trên một số entity nhất định.  
-- **Member**: chỉ xem.  
+1 **Admin**: full CRUD
+  - Hiển thị nút/ link thêm mới
+  - Hiển thị cột Action và các nút Edit, delete
+2 **Staff**:
+  - Xem toàn bộ dữ liệu, tìm kiếm,
+  - Hiển thị nút edit
+  - Ẩn thêm mới và delete
+3 **Customer**: chỉ xem.  
 
 ---
 
-### 3. Gõ trực tiếp URL
+### 3. Gõ trực tiếp URL /students | /students/edit/id | /students/remove/id
 - Nếu chưa login mà gõ trực tiếp → chuyển sang trang login.  
-- Phải khởi động từ màn hình chính `/products` (??).  
+- Phải khởi động từ màn hình chính `/` | /login.
+
+---
+### 4. Logout
+- Thoát user đang login
+- Trả lại trang login
 
 ---
 
@@ -46,6 +56,31 @@ Script xử lý thông báo nếu được redirect sang. Do có lấy dữ li�
         // document.getElementById("msg").textContent = "Access denied. You must login first!";
     }
 </script>
+```
+## Bổ sung thuộc tính ghi ngày giờ tạo lập, chỉnh sửa
+### Tại class Student
+1. Bổ sung trên đầu class:
+```java
+  @EntityListeners(AuditingEntityListener.class)
+```
+2. Thêm thuộc tính createdDate, lastModifiedDate như sau:
+```java
+  //Bổ sung ngày tạo, chỉnh sửa là ngày hiện hành
+  @CreatedDate //Tự động spring ghi database ngày tạo
+  private LocalDateTime createdDate;
+  
+  @LastModifiedDate
+  private LocalDateTime lastModifiedDate;
+```
+3. Bổ sung @EnableJpaAuditing tại hàm main chính của app
+```java
+  @SpringBootApplication
+  @EnableJpaAuditing //Bổ sung ghi nhận nhật ký
+  public class CoffeeMvcFinalApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(CoffeeMvcFinalApplication.class, args);
+    }
+  }
 ```
 ---
 # Note 14/8/2025
