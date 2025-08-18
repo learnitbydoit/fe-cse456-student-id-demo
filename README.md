@@ -29,7 +29,27 @@ Khi xử lý login, có những trường hợp xảy ra:
 
 ### Lưu ý
 - **Model**: chuyển dữ liệu qua lại giữa các trang nhưng *không lưu giữ lâu dài*.  
-- **HttpSession**: giữ dữ liệu lâu dài qua nhiều trang (tồn tại mặc định 30 phút).  
+- **HttpSession**: giữ dữ liệu lâu dài qua nhiều trang (tồn tại mặc định 30 phút).
+---
+## Xử lý cụ thể
+
+### Báo popup và chặn, quay lại login khi nhập link trực tiếp, viết ở đầu trang login
+<!-- Script xử lý thông báo nếu được redirect sang.
+     Do có lấy dữ liệu từ server nên cần `th:inline`
+     để Thymeleaf render đúng chuẩn dữ liệu:
+     - string có nháy
+     - số thì không
+     - object >> JSON
+-->
+```html
+<script th:inline="javascript">
+    var isLogin = /*[[${noLogin}]]*/ null;
+    if (isLogin == null) {
+        alert("Access denied. You must login first.");
+        // document.getElementById("msg").textContent = "Access denied. You must login first!";
+    }
+</script>
+
 
 ---
 # Note 14/8/2025
