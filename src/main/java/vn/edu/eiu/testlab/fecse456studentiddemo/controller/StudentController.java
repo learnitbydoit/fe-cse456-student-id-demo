@@ -122,7 +122,4 @@ public class StudentController {
         //Trả về trang student
         return "redirect:/students";
     }
-
-
-
 }
