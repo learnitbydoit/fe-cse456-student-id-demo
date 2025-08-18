@@ -12,8 +12,6 @@ Khi xử lý login, có những trường hợp xảy ra:
 - **Username đúng, password đúng, role = admin/staff & active = false** → *invalid credentials*.  
 - **Username đúng, password đúng, role = admin/staff & active = true** → vào trang `/products` với quyền cụ thể.
 
----
-
 ### 2. Authorization (Phân quyền truy cập)
 1 **Admin**: full CRUD
   - Hiển thị nút/ link thêm mới
@@ -24,23 +22,18 @@ Khi xử lý login, có những trường hợp xảy ra:
   - Ẩn thêm mới và delete
 3 **Customer**: chỉ xem.  
 
----
-
 ### 3. Gõ trực tiếp URL /students | /students/edit/id | /students/remove/id
 - Nếu chưa login mà gõ trực tiếp → chuyển sang trang login.  
 - Phải khởi động từ màn hình chính `/` | /login.
 
----
 ### 4. Logout
 - Thoát user đang login
 - Trả lại trang login
 
----
-
 ### Lưu ý
 - **Model**: chuyển dữ liệu qua lại giữa các trang nhưng *không lưu giữ lâu dài*.  
 - **HttpSession**: giữ dữ liệu lâu dài qua nhiều trang (tồn tại mặc định 30 phút).
----
+
 ## Xử lý cụ thể
 
 ### Báo popup và chặn, quay lại login khi nhập link trực tiếp, viết ở đầu trang login
@@ -95,12 +88,9 @@ Script xử lý thông báo nếu được redirect sang. Do có lấy dữ li�
     - 2.1. Dùng `if` để xử lý tiêu đề là **edit/new**.
     - 2.2. `th:readonly` = kiểm tra nếu `formMode = edit`.
 
----
 ## Viết Controller cho link remove / xóa
 1. Viết JavaScript thông báo **Yes/No** (trên file `trang-danh-sach.html`).
 2. Gọi service xóa.
-
----
 
 ## Viết Controller tìm kiếm
 1. **Chuẩn bị**:
@@ -114,18 +104,12 @@ Script xử lý thông báo nếu được redirect sang. Do có lấy dữ li�
     3.1. Bổ sung `@RequestParam` để lấy `keyword` (thêm thuộc tính `required = false` → *giải thích lý do*).  
     3.2. Sử dụng `if()` kiểm tra `keyword` và trả về danh sách tương ứng.
 
----
-
 ## Xử lý ngoại lệ / bắt lỗi
 1. Tạo entity `ErrorResponse` để format lỗi ngắn gọn.
 2. Tạo package `exception` → class `GlobalExceptionHandler`.
 
----
-
 ## Sử dụng log để kiểm tra
 - Dùng log trong danh sách controller để theo dõi luồng xử lý.
-
----
 
 ## Validate dữ liệu
 > Xem ghi chú trước `@PostMapping` của **Save** dữ liệu nhập.
@@ -136,7 +120,6 @@ Script xử lý thông báo nếu được redirect sang. Do có lấy dữ li�
 - **Chặn đầu** qua `@Valid` để kích hoạt việc kiểm soát từng field (đã được khai báo trong entity).
 - Nếu phát hiện **có lỗi** thì ghi biên bản vi phạm qua `BindingResult` (message được khai báo trong entity).
 - `BindingResult` sẽ được gửi kèm với `Model` và trả trở lại form nếu muốn người dùng **ở lại form để sửa**.
-
 
 ### Các bước thực hiện:
 1. Bổ sung dependency **Validation** (Bean Validation).
