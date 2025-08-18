@@ -5,12 +5,20 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tbl_Student")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EntityListeners(AuditingEntityListener.class)//Tự động ghi nhật ký
 public class Student {
     //Khai báo mapping ORM
     @Id
@@ -45,6 +53,16 @@ public class Student {
     @ManyToOne()
     @JoinColumn(name = "majorID")//Để báo là tui muốn đặt tên cột khóa ngoại
     private Major major; //Cái này sẽ gắn vào mappedBy bên class Major
+
+    //Thuộc tính ghi nhận ngày giờ tạo
+    @CreatedDate //Tự động ghi ngày tạo sinh viên
+    private LocalDateTime createdDate;
+
+    @LastModifiedDate //Ghi nhận thời điểm chỉnh sửa lần cuối
+    private LocalDateTime modifiedDate;
+
+    //@CreatedBy //Ghi nhận user tạo
+    //@LastModifiedBy //Ghi nhận người chỉnh sửa cuối cùng
 
     //Bổ sung thêm constructor không có major, vì lúc thêm mới sinh viên chưa có thông tin major.
     public Student(String id, String name, int yob, double gpa) {

@@ -5,7 +5,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import vn.edu.eiu.testlab.fecse456studentiddemo.model.Major;
 import vn.edu.eiu.testlab.fecse456studentiddemo.model.Student;
+import vn.edu.eiu.testlab.fecse456studentiddemo.model.User;
 import vn.edu.eiu.testlab.fecse456studentiddemo.service.MajorService;
+import vn.edu.eiu.testlab.fecse456studentiddemo.service.UserService;
+
 /** Khi thêm data chú ý là phải thêm bảng 1 trước,
  * thêm bảng nhiều sau.
  * */
@@ -14,6 +17,10 @@ public class DataInitializer implements CommandLineRunner {
     //Tiêm service để thao tác dữ liệu
     @Autowired //tiêm bằng field (có 3 cách)
     MajorService majorServ;
+
+    @Autowired
+    UserService userServ;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -36,6 +43,14 @@ public class DataInitializer implements CommandLineRunner {
         //Gọi service lưu database
         majorServ.saveMajor(m1);
         majorServ.saveMajor(m2);
+
+        //Thêm mới user
+        User admin = new User("admin","admin",1);
+        User staff = new User("staff","staff",2);
+        User student = new User("student","student",3);
+        userServ.save(admin);
+        userServ.save(staff);
+        userServ.save(student);
 
     }
 }
