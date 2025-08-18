@@ -34,6 +34,7 @@ Khi xử lý login, có những trường hợp xảy ra:
 ## Xử lý cụ thể
 
 ### Báo popup và chặn, quay lại login khi nhập link trực tiếp, viết ở đầu trang login
+```
 <!-- Script xử lý thông báo nếu được redirect sang.
      Do có lấy dữ liệu từ server nên cần `th:inline`
      để Thymeleaf render đúng chuẩn dữ liệu:
@@ -49,7 +50,7 @@ Khi xử lý login, có những trường hợp xảy ra:
         // document.getElementById("msg").textContent = "Access denied. You must login first!";
     }
 </script>
-
+```
 
 ---
 # Note 14/8/2025
